@@ -18,5 +18,8 @@
     "web": "expo start --web",
     "setup:vscode": "node scripts/setup-vscode.js"
   },
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "@expo/ngrok": "^4.1.3"
+  }
 }
