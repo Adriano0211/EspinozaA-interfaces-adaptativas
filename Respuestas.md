@@ -29,3 +29,9 @@
 **Pregunta:** La pantalla del ejercicio 07 (galería) se dibuja hasta el borde inferior. ¿Qué inset le falta y dónde lo aplicarías: en `App.js` o en la propia pantalla?
 
 **Respuesta:** Le falta respetar `insets.bottom` para que las últimas celdas no queden detrás de la barra de gestos o el indicador de inicio. Lo aplicaría como `paddingBottom` al contenido de la `FlatList` en `GalleryScreen`, porque esa pantalla se dibuja hasta el borde inferior y debe gestionar ese espacio sin añadir padding inferior a todas las pantallas desde `App.js`.
+
+## Ejercicio 06 — Tamaño por elemento: onLayout
+
+**Pregunta:** ¿Por qué `compact` exige `cardWidth > 0`? ¿Qué se vería en el primer render si no lo hicieras?
+
+**Respuesta:** Antes de que `onLayout` mida la tarjeta, `cardWidth` vale 0. Sin la condición `cardWidth > 0`, la comparación `0 < 240` activaría el modo compacto en el primer render: la imagen aparecería con 80 dp de alto y la descripción oculta, aunque todavía no se conoce el ancho real. Tras la medición podría cambiar al modo completo. Con la condición, empieza completa hasta recibir una medida válida.
