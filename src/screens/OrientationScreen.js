@@ -1,4 +1,4 @@
-import { ScrollView, View, Text, StyleSheet } from "react-native";
+import { ScrollView, View, Text, StyleSheet, useWindowDimensions } from "react-native";
 import Section from "../components/Section";
 import Badge from "../components/Badge";
 import { colors, spacing, radius } from "../theme";
@@ -10,9 +10,9 @@ const CARDS = [
 ];
 
 export default function OrientationScreen() {
-  // TODO (Ejercicio 03, paso 1): obtén width y height con useWindowDimensions y calcula
-  // isPortrait = height >= width (opción 1 de la slide 13: sin librerías, siempre actualizado).
-  const isPortrait = true;
+  // Ejercicio 03, paso 1: actualizar la orientación al cambiar el tamaño de la ventana.
+  const { width, height } = useWindowDimensions();
+  const isPortrait = height >= width;
   const isLandscape = !isPortrait;
 
   return (
@@ -24,11 +24,11 @@ export default function OrientationScreen() {
         </Text>
       </Section>
 
-      {/* TODO (Ejercicio 03, paso 2): en landscape las tarjetas van en fila (flexDirection: "row") y cada una con flex: 1;
-          en portrait, apiladas en columna (slide 14). */}
-      <View style={{ flexDirection: "column", gap: spacing.md }}>
+      {/* Ejercicio 03, paso 2: apilar las tarjetas en vertical y ponerlas en fila en horizontal. */}
+      <View style={{ flexDirection: isLandscape ? "row" : "column", gap: spacing.md }}>
+        {/* Ejercicio 03, paso 3: repartir el ancho por igual entre las tres tarjetas horizontales. */}
         {CARDS.map((card) => (
-          <View key={card.id} style={styles.card}>
+          <View key={card.id} style={[styles.card, isLandscape && { flex: 1 }]}>
             <Text style={styles.cardTitle}>{card.title}</Text>
             <Text style={styles.cardBody}>{card.body}</Text>
           </View>
