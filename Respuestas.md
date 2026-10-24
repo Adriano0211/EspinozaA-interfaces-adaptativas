@@ -22,7 +22,7 @@
 
 **Pregunta:** ¿Por qué las funciones viven en `src/utils/` y no dentro de una pantalla? ¿Quién más las va a usar?
 
-**Respuesta:** Porque `getDeviceClass` y `getColumns` calculan resultados a partir del ancho y pueden reutilizarse sin depender de una pantalla. `BreakpointsScreen` usa ambas funciones para mostrar la clase y las columnas actuales; `GalleryScreen` usa `getDeviceClass` para el indicador y usará `getColumns` en el ejercicio 07 para ajustar la galería.
+**Respuesta:** Porque `getDeviceClass` y `getColumns` calculan resultados a partir del ancho y pueden reutilizarse sin depender de una pantalla. `BreakpointsScreen` usa ambas funciones para mostrar la clase y las columnas actuales; `GalleryScreen` usa `getDeviceClass` para el indicador y `getColumns` para ajustar la galería.
 
 ## Ejercicio 05 — Áreas seguras: insets
 
@@ -35,3 +35,9 @@
 **Pregunta:** ¿Por qué `compact` exige `cardWidth > 0`? ¿Qué se vería en el primer render si no lo hicieras?
 
 **Respuesta:** Antes de que `onLayout` mida la tarjeta, `cardWidth` vale 0. Sin la condición `cardWidth > 0`, la comparación `0 < 240` activaría el modo compacto en el primer render: la imagen aparecería con 80 dp de alto y la descripción oculta, aunque todavía no se conoce el ancho real. Tras la medición podría cambiar al modo completo. Con la condición, empieza completa hasta recibir una medida válida.
+
+## Ejercicio 07 — Galería adaptativa
+
+**Pregunta:** La galería usa el ancho de la ventana. Si la metieras dentro de un panel lateral de 320 dp en tablet, ¿qué cambiarías para que siguiera funcionando?
+
+**Respuesta:** Mediría el ancho real del panel con `onLayout`, como en el ejercicio 06, y usaría ese ancho para `getColumns` y para calcular `itemWidth = anchoDelPanel / columns`. Así, dentro de un panel de 320 dp la galería usaría 2 columnas ajustadas al panel, aunque la ventana de la tablet sea más ancha.

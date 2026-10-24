@@ -1,4 +1,6 @@
-import { FlatList, Image, View, Text, StyleSheet } from "react-native";
+import { FlatList, Image, View, Text, StyleSheet, useWindowDimensions } from "react-native";
+// Ejercicio 07: respetar el inset inferior sin cambiar el espacio de las otras pantallas.
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Badge from "../components/Badge";
 import { PRODUCTS } from "../data/products";
 import { getColumns, getDeviceClass } from "../utils/breakpoints";
@@ -6,12 +8,13 @@ import { colors, spacing } from "../theme";
 
 /** Slide 19: galería adaptativa. Un componente, cuatro layouts según el ancho de ventana. */
 export default function GalleryScreen() {
-  // TODO (Ejercicio 07, paso 1): obtén width con useWindowDimensions.
-  const width = 360;
+  // Ejercicio 07, paso 1: actualizar el ancho al rotar o cambiar el tamaño de la ventana.
+  const { width } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
 
-  // TODO (Ejercicio 07, paso 2): columnas con getColumns(width) y ancho de cada celda = width / columns.
-  const columns = 2;
-  const itemWidth = 180;
+  // Ejercicio 07, paso 2: elegir columnas por breakpoint y mantener las celdas cuadradas.
+  const columns = getColumns(width);
+  const itemWidth = width / columns;
 
   return (
     <View style={{ flex: 1 }}>
@@ -20,11 +23,13 @@ export default function GalleryScreen() {
         <Badge tone="info">{getDeviceClass(width)}</Badge>
         <Text style={styles.hint}>{width.toFixed(0)} dp</Text>
       </View>
-      {/* TODO (Ejercicio 07, paso 3): agrega key={columns} para que FlatList recalcule cuando cambia numColumns */}
+      {/* Ejercicio 07, paso 3: remontar FlatList cuando cambia numColumns. */}
       <FlatList
+        key={columns}
         data={PRODUCTS}
         keyExtractor={(p) => p.id}
         numColumns={columns}
+        contentContainerStyle={{ paddingBottom: insets.bottom }}
         renderItem={({ item }) => (
           <View style={{ width: itemWidth, height: itemWidth, padding: 2 }}>
             <Image source={{ uri: item.uri }} style={styles.image} />
