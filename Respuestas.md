@@ -23,3 +23,9 @@
 **Pregunta:** ¿Por qué las funciones viven en `src/utils/` y no dentro de una pantalla? ¿Quién más las va a usar?
 
 **Respuesta:** Porque `getDeviceClass` y `getColumns` calculan resultados a partir del ancho y pueden reutilizarse sin depender de una pantalla. `BreakpointsScreen` usa ambas funciones para mostrar la clase y las columnas actuales; `GalleryScreen` usa `getDeviceClass` para el indicador y usará `getColumns` en el ejercicio 07 para ajustar la galería.
+
+## Ejercicio 05 — Áreas seguras: insets
+
+**Pregunta:** La pantalla del ejercicio 07 (galería) se dibuja hasta el borde inferior. ¿Qué inset le falta y dónde lo aplicarías: en `App.js` o en la propia pantalla?
+
+**Respuesta:** Le falta respetar `insets.bottom` para que las últimas celdas no queden detrás de la barra de gestos o el indicador de inicio. Lo aplicaría como `paddingBottom` al contenido de la `FlatList` en `GalleryScreen`, porque esa pantalla se dibuja hasta el borde inferior y debe gestionar ese espacio sin añadir padding inferior a todas las pantallas desde `App.js`.

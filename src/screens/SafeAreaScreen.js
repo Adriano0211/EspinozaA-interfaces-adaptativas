@@ -1,4 +1,6 @@
 import { View, Text, ScrollView, StyleSheet } from "react-native";
+// Ejercicio 05, paso 3: leer los insets dentro de la pantalla para medir las franjas.
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Section from "../components/Section";
 import InfoRow from "../components/InfoRow";
 import { colors, spacing } from "../theme";
@@ -8,8 +10,8 @@ import { colors, spacing } from "../theme";
  * Esta pantalla debe pintar franjas con los insets reales para que se vean las áreas no seguras.
  */
 export default function SafeAreaScreen() {
-  // TODO (Ejercicio 05, paso 2): importa useSafeAreaInsets de react-native-safe-area-context y reemplaza este objeto.
-  const insets = { top: 0, bottom: 0, left: 0, right: 0 };
+  // Ejercicio 05, paso 3: actualizar las cuatro medidas al cambiar el área segura.
+  const insets = useSafeAreaInsets();
 
   return (
     <View style={{ flex: 1 }}>
