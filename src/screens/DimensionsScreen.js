@@ -11,20 +11,14 @@ import InfoRow from "../components/InfoRow";
 import Badge from "../components/Badge";
 import { colors, spacing } from "../theme";
 
-// TODO (Ejercicio 01, paso 4): guarda aquí un snapshot con Dimensions.get("window") a nivel de archivo.
-// Es la trampa de la slide 8: se toma UNA vez y no cambia al rotar. Lo vas a comparar con el valor en vivo.
-const SNAPSHOT = { width: 0, height: 0 };
-
-// const SNAPSHOT = Dimensions.get("window");
+// Ejercicio 01, paso 4: guardar una sola lectura inicial para compararla con el ancho en vivo.
+const SNAPSHOT = Dimensions.get("window");
 
 export default function DimensionsScreen() {
-  // TODO (Ejercicio 01, paso 1): obtén window y screen con Dimensions.get(...)
-  // const window = { width: 0, height: 0 };
-  // const screen = { width: 0, height: 0 };
-  // const live = useWindowDimensions(); // referencia en vivo para comparar (ejercicio 02)
-
+  // Ejercicio 01, paso 1: consultar el área visible y la pantalla completa.
   const window = Dimensions.get("window");
   const screen = Dimensions.get("screen");
+  // Ejercicio 01, paso 5: mostrar la medida reactiva junto al snapshot inicial.
   const live = useWindowDimensions();
 
   return (
@@ -55,8 +49,7 @@ export default function DimensionsScreen() {
       </Section>
 
       <Section title="Densidad: dp vs píxeles físicos">
-        {/* TODO (Ejercicio 01, paso 2 y 3): reemplaza los "?" con PixelRatio.get(), getPixelSizeForLayoutSize(100),
-            el ancho físico (window.width en px) y getFontScale() */}
+        {/* Ejercicio 01, pasos 2 y 3: mostrar densidad, conversiones a píxeles y escala de fuente. */}
         <InfoRow
           label="PixelRatio.get()"
           value={PixelRatio.get()}
