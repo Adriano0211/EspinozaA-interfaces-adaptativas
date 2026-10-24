@@ -17,3 +17,9 @@
 **Pregunta:** ¿En qué caso real de tu proyecto final la misma pantalla debería cambiar de columna a fila?
 
 **Respuesta:** En la pantalla **Alerta SOS** de FindMyChibolo: en portrait, el mapa y la información se mostrarían uno debajo del otro; en landscape, el mapa iría a la izquierda y las capturas, la batería y los botones de llamada a la derecha. Así se aprovecha el ancho adicional sin cambiar el contenido de la pantalla.
+
+## Ejercicio 04 — Breakpoints por clase de dispositivo
+
+**Pregunta:** ¿Por qué las funciones viven en `src/utils/` y no dentro de una pantalla? ¿Quién más las va a usar?
+
+**Respuesta:** Porque `getDeviceClass` y `getColumns` calculan resultados a partir del ancho y pueden reutilizarse sin depender de una pantalla. `BreakpointsScreen` usa ambas funciones para mostrar la clase y las columnas actuales; `GalleryScreen` usa `getDeviceClass` para el indicador y usará `getColumns` en el ejercicio 07 para ajustar la galería.

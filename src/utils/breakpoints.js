@@ -14,13 +14,18 @@ export const DEVICE_CLASSES = [
 
 /** Devuelve la clase de dispositivo a partir del ancho de ventana en dp. */
 export function getDeviceClass(width) {
-  // TODO (Ejercicio 04): devolver "phone-portrait", "phone-landscape", "tablet-portrait" o
-  // "tablet-landscape" comparando width con los valores de BREAKPOINTS.
-  return "phone-portrait";
+  // Ejercicio 04: clasificar el ancho con los límites compartidos, del menor al mayor.
+  if (width < BREAKPOINTS.phoneLandscape) return "phone-portrait";
+  if (width < BREAKPOINTS.tabletPortrait) return "phone-landscape";
+  if (width < BREAKPOINTS.tabletLandscape) return "tablet-portrait";
+  return "tablet-landscape";
 }
 
 /** Número de columnas de la galería según el ancho de ventana (slide 19). */
 export function getColumns(width) {
-  // TODO (Ejercicio 04): 2 columnas por debajo de 600 dp, 3 por debajo de 768, 4 por debajo de 1024 y 6 en adelante.
-  return 2;
+  // Ejercicio 04: usar los mismos límites para asignar 2, 3, 4 o 6 columnas.
+  if (width < BREAKPOINTS.phoneLandscape) return 2;
+  if (width < BREAKPOINTS.tabletPortrait) return 3;
+  if (width < BREAKPOINTS.tabletLandscape) return 4;
+  return 6;
 }
